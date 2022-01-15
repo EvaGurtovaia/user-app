@@ -14,14 +14,19 @@ const AddUser = (props) => {
         setEnteredAge(event.target.value);
     };
     const addUserHandler = (event) => {
-        event.preventDefailt();
-        if (enteredUsername.trim().length === 0 || enteredAge) {
+        console.log("Am I working?");
+        event.preventDefault();
+        if (
+            enteredUsername.trim().length === 0 ||
+            enteredAge.trim().length === 0
+        ) {
             return;
         }
         if (+enteredAge < 1) {
             return;
         }
-
+        props.onAddUser(enteredUsername, enteredAge);
+        console.log("I'm wokring!");
         setEnteredUsername("");
         setEnteredAge("");
     };
@@ -33,7 +38,7 @@ const AddUser = (props) => {
                     id="username"
                     type="text"
                     value={enteredUsername}
-                    onChane={usernameChangeHandler}
+                    onChange={usernameChangeHandler}
                 ></input>
                 <label htmlFor="age">Age</label>
                 <input
@@ -42,7 +47,7 @@ const AddUser = (props) => {
                     value={enteredAge}
                     onChange={ageChangeHandler}
                 ></input>
-                <Button>Add user</Button>
+                <Button type="submit">Add user</Button>
             </form>
         </Card>
     );
